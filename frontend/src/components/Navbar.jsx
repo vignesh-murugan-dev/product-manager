@@ -27,7 +27,7 @@ const Navbar = () => {
                             <Link to="/product/add" className="hover:text-blue-200">
                                 Add Product
                             </Link>
-                            <span className="text-blue-200">Hello, {user?.name}</span>
+                            <span className="text-blue-200">Hello, {user?.name ?  user?.name : "User"}</span>
                             <button
                                 onClick={handleLogout}
                                 className="bg-blue-700 hover:bg-blue-800 px-4 py-2 rounded"
@@ -50,3 +50,5 @@ const Navbar = () => {
         </nav>
     )
 };
+
+export default Navbar;

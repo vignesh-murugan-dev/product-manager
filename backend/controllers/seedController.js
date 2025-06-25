@@ -30,7 +30,29 @@ const seedProducts = async (req, res, next) => {
         }
 
         // Save products to the database
-        await Product.insertMany(data.products);
+        const productsToInsert = data.products
+          .filter(product =>
+            product.title &&
+            product.description &&
+            typeof product.price === 'number' &&
+            product.brand && // Ensure brand exists
+            product.category &&
+            product.thumbnail
+          )
+          .map(product => ({
+            title: product.title,
+            description: product.description,
+            price: product.price,
+            discountPercentage: product.discountPercentage,
+            rating: product.rating,
+            stock: product.stock,
+            brand: product.brand,
+            category: product.category,
+            thumbnail: product.thumbnail,
+            images: product.images,
+          }));
+
+        await Product.insertMany(productsToInsert);
 
         res.status(200).json({
             status: 'success',
@@ -41,3 +63,5 @@ const seedProducts = async (req, res, next) => {
         next(error); 
     }
 }
+
+export default { seedProducts };

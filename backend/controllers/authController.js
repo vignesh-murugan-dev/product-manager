@@ -39,7 +39,7 @@ const signup = async (req, res, next) => {
 }
 
 // login function to authenticate a user
-const login = async (req, res) => {
+const login = async (req, res, next) => {
     try {
         const { email, password } = req.body;
 
@@ -69,7 +69,7 @@ const login = async (req, res) => {
 }
 
 // middleware to protect routes that require authentication
-const protect = async (req, res) => {
+const protect = async (req, res, next) => {
     try {
         // Get token from headers
         const token = req.headers.authorization?.split(' ')[1];

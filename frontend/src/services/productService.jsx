@@ -1,7 +1,6 @@
 import axios from 'axios';
 
-const API_URL = import.meta.env.VITE_API_URL|| 'http://localhost:5000/api';
-const token = localStorage.getItemI=("token");
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 
 // Get all products
 export const getProducts = async () => {
@@ -17,6 +16,9 @@ export const getProductById = async (id) => {
 
 // Create a new product
 export const createProduct = async (productData) => {
+    // Get the token at the time of the request
+    const token = localStorage.getItem("token");
+    
     const response = await axios.post(`${API_URL}/products`, productData, {
         headers: {
             'Authorization': `Bearer ${token}`
@@ -27,6 +29,9 @@ export const createProduct = async (productData) => {
 
 // Update a product
 export const updateProduct = async (id, productData) => {
+    // Get the token at the time of the request
+    const token = localStorage.getItem("token");
+    
     const response = await axios.patch(`${API_URL}/products/${id}`, productData, {
         headers: {
             'Authorization': `Bearer ${token}`
@@ -37,6 +42,9 @@ export const updateProduct = async (id, productData) => {
 
 // Delete a product
 export const deleteProduct = async (id) => {
+    // Get the token at the time of the request
+    const token = localStorage.getItem("token");
+    
     const response = await axios.delete(`${API_URL}/products/${id}`, {
         headers: {
             'Authorization': `Bearer ${token}`
@@ -47,10 +55,17 @@ export const deleteProduct = async (id) => {
 
 // Seed products from dummyJSON API
 export const seedProducts = async (clear) => {
+    // Get the token at the time of the request
+    const token = localStorage.getItem("token");
+    
     const url = clear
         ? `${API_URL}/seed/products?clear=true`
         : `${API_URL}/seed/products`;
 
-    const response = await axios.get(url);
+    const response = await axios.get(url, {
+        headers: {
+            'Authorization': `Bearer ${token}`
+        }
+    });
     return response.data.message;
 }

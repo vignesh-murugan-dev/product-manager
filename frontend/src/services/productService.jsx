@@ -4,31 +4,31 @@ const API_URL = import.meta.env.VITE_API_URL|| 'http://localhost:5000/api';
 
 // Get all products
 export const getProducts = async () => {
-    const response = await axios.get(`${API_URL}/product`);
+    const response = await axios.get(`${API_URL}/products`);
     return response.data.data.products;
 };
 
 // Get product by ID
 export const getProductById = async (id) => {
-    const response = await axios.get(`${API_URL}/product/${id}`);
+    const response = await axios.get(`${API_URL}/products/${id}`);
     return response.data.data.product;
 };
 
 // Create a new product
 export const createProduct = async (productData) => {
-    const response = await axios.post(`${API_URL}/product`, productData);
+    const response = await axios.post(`${API_URL}/products`, productData);
     return response.data.data.product;
 }
 
 // Update a product
 export const updateProduct = async (id, productData) => {
-    const response = await axios.patch(`${API_URL}/product/${id}`, productData);
+    const response = await axios.patch(`${API_URL}/products/${id}`, productData);
     return response.data.data.product;
 }
 
 // Delete a product
 export const deleteProduct = async (id) => {
-    const response = await axios.delete(`${API_URL}/product/${id}`);
+    const response = await axios.delete(`${API_URL}/products/${id}`);
     return response.data.data;
 }
 
